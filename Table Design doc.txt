@@ -1,0 +1,24 @@
+Creator: Donald Robinson
+Date Created: 2/23/2017
+Date Last Modifyed: 2/27/2017
+Purpose: this class serves dule purposes firstly it is used by the database class inorder to store and sort data and secondly it is used by outher classes as nessesary <insert list here> to store data in a single table mode.
+Description:
+this class when created takes a name and a boolean for wether or not it is in a database. this then sets up the table for later reffrence and the boolean turns varios methods and fearures on and off so that forin key and outer referencial data is not included in stand alone tables. this class will then take data on the cloumns it has to create its data storage structures.
+
+public void Table{
+	Description
+		this is the default constructor and is used to create the table it however dose not allow for column creation
+	Input
+		name - gives the table a name for later reference
+		DB - used to turn on and off features relative to inter table linking
+	Output
+		NA
+}
+public void addColumn{
+	Description
+	Input
+		type - what type of data can be put in the column <text,number,bool>
+		size - how long the max dimention of the data is aloud to be
+	Output
+		NA
+}
