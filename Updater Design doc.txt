@@ -1,0 +1,23 @@
+Creator: Kristine Bunnell
+Date Created: 2/28/2017
+Date Last Modifyed: 2/28/2017
+Purpose: to generate quriys for updating information already in the system
+Description:
+
+Public Void Updater(){
+	Description
+		Creates the object
+	Input
+		NA
+	Output
+		NA
+}
+
+Public String Update(List x){
+	Description 
+		takes in a list object and formulates a quiry that will get new data from walmart about the items on the list
+	Input
+		x - this list object contains all the data about things that need to be fixed
+	Output
+		quiry - returns the generated quiry
+}
