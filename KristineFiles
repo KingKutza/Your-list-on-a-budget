@@ -1,0 +1,64 @@
+package collections;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+
+public class GroceryList {
+	
+	
+  //Not really sure if I have the right variables or not. Or really what to name things.
+  //Or how to connect my functions to the Walmart API
+  //Kind of tried my best at understanding what to do
+  
+	public static void main (String[] args){
+		String name = "Walmart API";    
+		int ID;
+		int index;
+		
+	}
+	
+	public class WalmartAPI{
+		
+		private static final String[] x = null;
+		private String name;
+		private String ID;
+		private int index;
+		
+	
+	public String getItem(int index){
+		
+		List myList;
+		String firstObject = (String) myList.get(0);
+		
+		
+	}
+	
+	public void addItem(){
+		List myList = new ArrayList();
+		
+		myList.add("Object1"); //Adding strings to a list
+		myList.add("Oject2");
+		
+	}
+	
+	public void setName(String ID){
+		this.ID = ID;
+		
+	}
+	
+	public String getQuery(String ID){
+		
+		return this.ID;
+		
+	}
+	
+	public String[] readResult(String x){
+		return this.x;
+		
+	}
+	
+}
+}
