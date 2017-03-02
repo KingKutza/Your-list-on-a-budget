@@ -26,7 +26,39 @@ public class Table {
 			OuterDatum next = null;
 			//new OuterDatum();//a recursive link to the next outer datum
 			public void addRow(String data){//adds a new row of data to the table
-				
+				if(row_count<100){//checks to see if there is space left in the current datum for an additional rows
+					if(row_count<50){//halvs the data for more efficiant row insertion
+						if(row_count<10){//checks to see if it is in the first inner datum
+							dataarr[0].addRow( data);
+						}else if(row_count<20){//checks to see if it is in the second inner datum
+							dataarr[1].addRow( data);
+						}else if(row_count<30){//checks to see if it is in the third inner datum
+							dataarr[2].addRow( data);
+						}else if(row_count<40){//checks to see if it is in the fourth inner datum
+							dataarr[3].addRow( data);
+						}else{//checks to see if it is in the fifth inner datum
+							dataarr[4].addRow( data);
+						}
+					}else{	
+						if(row_count<60){//checks to see if it is in the sixth inner datum
+							dataarr[5].addRow( data);
+						}else if(row_count<70){//checks to see if it is in the seventh inner datum
+							dataarr[6].addRow( data);
+						}else if(row_count<80){//checks to see if it is in the eighth inner datum
+							dataarr[7].addRow( data);
+						}else if(row_count<90){//checks to see if it is in the ninth inner datum
+							dataarr[8].addRow( data);
+						}else{//checks to see if it is in the tenth inner datum
+							dataarr[9].addRow( data);
+						}
+					}
+				}else{
+					if{
+						
+					}else{
+						
+					}
+				}
 				
 			}
 			public void OuterDatum(){
