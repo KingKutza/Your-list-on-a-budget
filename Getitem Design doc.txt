@@ -1,6 +1,6 @@
 Creator: Kristine Bunnell
 Date Created: 2/28/2017
-Date Last Modifyed: 2/28/2017
+Date Last Modified: 2/28/2017
 Purpose: used for getting data on a specific item ( one that we already have out of date information on)
 Description: 
 
@@ -12,9 +12,9 @@ Public Void Getitem(String name){
 	Output
 		NA
 }
-Public String getQuiry(String id){
+Public String getQuery(String id){
 	Description
-		generates a quiry to send to walmart
+		generates a query to send to walmart
 	Input
 		id - the walmart database id that can be used to look up the item in question
 	Output
