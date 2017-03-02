@@ -21,8 +21,14 @@ public class Table {
 		
 		private class OuterDatum{//a container that holds ten inner datums or 100 data points 
 			int index;
+			int row_count;//used to keep track of the number of rows in the datum to determin when it is nessesary to hand the new row down a recursive ladder
 			InnerDatum[] dataarr = new InnerDatum[CONST_OuterDatum_Size];
-			OuterDatum next = new OuterDatum();//a recursive link to the next outer datum
+			OuterDatum next = null;
+			//new OuterDatum();//a recursive link to the next outer datum
+			public void addRow(String data){//adds a new row of data to the table
+				
+				
+			}
 			public void OuterDatum(){
 				
 			}
