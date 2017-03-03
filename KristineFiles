@@ -4,8 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+//the problem you are haveing is that you are still trying to do it in one file
+//as of right now there is no class grocery list (no entry point at all)
+//what you are trying to say is something more like this
+//lets say you are working on the Getitem class
+
+public class Getitem{
+	public void Getitem(){
+	//sets up anything that needs setting up for the class
+	}
+	public String getQuery(String id){
+		String begin="";//contains the first part of the get item quriy 
+		String end="";//containes the last part of the get item qury
+		String Return = begin + id + end;
+		return Return;
+	}
+	public String Interprit(String result){
+		//search for the data you want
+		//place that data into local variables
+		//put a string together in a propriatary format to contain all the information pertinat to an item(will add a file later today detailing this format)
+		//sent the string back to the caller
+	}
+}
 
 
+/*
 public class GroceryList {
 	
 	
@@ -61,4 +84,4 @@ public class GroceryList {
 	}
 	
 }
-}
+}*/
