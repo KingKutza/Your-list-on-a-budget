@@ -1,24 +1,24 @@
 "SIT::name::date_updated::price::quantity::imageurl::sale::description::notes:"
 
 Breakdown
-SIT => indicateds that the string is in the string item format
-:: => delimits peaces of data the first one is the end of the data infront of it and the second the begining of the data after it
+SIT => indicates that the string is in the string item format
+:: => delimits pieces of data the first one is the end of the data in front of it and the second the beginning of the data after it
 name => format hello world cookies    spaces are allowed
 		contains the name of the item
-date_updated => fromat 01012017 there are no delimiters between parts all days and mounths are two digits and the year 4
-				contains the date that the item was last recived from the walmart server 
-pric => format 10.32 the dollar number . the cent number
+date_updated => fromat 01012017 there are no delimiters between parts all days and months are two digits and the year 4
+				contains the date that the item was last received from the walmart server 
+price => format 10.32 the dollar number . the cent number
 		contains the price of the item
 quantity => format 5
 			the number of the item in stock
 imageurl => format http://www.walmart.com/imagefile/listapp1  a url 
 			the url provided by walmart linking to a picture of the item
 sale =>	format true
-		a boolean value that says wether or not the item is on sale
+		a boolean value that says whether or not the item is on sale
 description => format this is a description     spaces are allowed
 				a walmart provided test description of the item
 notes => format abc xyz
 		debugging data
 		
-the whole thing is ment to allow for a standard transfer of data from one class to anouther
-if you think it would be simpler to use an object to contain the data tell me befor 3-7-17 and we can change the way we wright the code acordingly
+the whole thing is meant to allow for a standard transfer of data from one class to another
+if you think it would be simpler to use an object to contain the data tell me befor 3-7-17 and we can change the way we write the code accordingly
