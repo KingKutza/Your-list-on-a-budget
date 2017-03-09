@@ -1,7 +1,7 @@
-"SIT::name::date_updated::price::quantity::imageurl::sale::description::notes:"
+"SIF::name::date_updated::price::quantity::imageurl::sale::description::notes:"
 
 Breakdown
-SIT => indicates that the string is in the string item format
+SIF => indicates that the string is in the string item format
 :: => delimits pieces of data the first one is the end of the data in front of it and the second the beginning of the data after it
 name => format hello world cookies    spaces are allowed
 		contains the name of the item
