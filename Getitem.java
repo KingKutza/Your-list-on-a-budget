@@ -2,8 +2,12 @@
 //Donald - Kristine
 //getting data on a specific item from the walmart open api
 public class GetItem {
-	static String QOPEN = "http://api.walmartlabs.com/v1/items1/";
-	static String QCLOSE = "?apiKey={apiKey}&lsPublisherId={Your LinkShare Publisher Id}&format=xml";
+	static char parenthesis = 34;
+	static String QOPEN = "http://api.walmartlabs.com/v1/items1/";//the beginning half of an api query that goes out
+	static String QCLOSE = "?apiKey={apiKey}&lsPublisherId={Your LinkShare Publisher Id}&format=xml";//the ending half of an api query that goes out
+	static char STARTDELIM = parenthesis;//delimits the beginning of a line in the api response
+	static char MIDDELIM = ':';//delimits the name of a category in the response and the data it contains
+	static char ENDDELIM = ',';//delimits the end of the line in the api response
 	
 	public void GetItem(){
 		//initializes the class
@@ -14,88 +18,64 @@ public class GetItem {
 		return result;
 	}
 	public String readResult(String x){
-		String[][] raw = new String[100][2];//the data received from walmart before it is sorted
+		String[][] raw = new String[100][2];//the data received from walmart before it is sorted  0 for name 1 for data
 		String[][] parsed = new String[9][2];//the data after it is sorted
-		parsed[0][0]="date";//contains the date last modified
-		parsed[1][0]="name";//contains the date last modified
-		parsed[2][0]="salePrice";//contains the date last modified
-		parsed[3][0]="date";//contains the date last modified
-		parsed[4][0]="date";//contains the date last modified
-		parsed[5][0]="date";//contains the date last modified
-		parsed[6][0]="date";//contains the date last modified
-		parsed[7][0]="date";//contains the date last modified
-		parsed[8][0]="date";//contains the date last modified	
+			parsed[0][0]="name";//contains the name of the item
+			parsed[1][0]="date";//contains the date last modified
+			parsed[2][0]="salePrice";//contains the price of the item
+			parsed[3][0]="stock";//contains whether or not the item is in stock
+			parsed[4][0]="thumbnailImage";//contains a link to an image of the item
+			parsed[5][0]="clearance";//contains whether or not the item is on sale
+			parsed[6][0]="itemId";//contains the Walmart Item ID
+			parsed[7][0]="longDescription";//contains a description of the item
+			parsed[8][0]="Notes";//contains any programming notes or debugging information
+		String tempName = "";//holds the extracted name string before parsing
+		String tempData = "";//holds the extracted data string before parsing		
 		
-		String name;
-		double price;
-		int quantity;
-		String image;
-		boolean sale;
-		String description;
-		String notes;
-		int itemid;
-		/*
-		 * {  
-   "items":[  
-      {  
-         "itemId":50285046,
-         "parentItemId":50285046,
-         "name":"Straight Talk Apple iPhone 5S 16GB 4G LTE Prepaid Smartphone",
-         "msrp":450,
-         "salePrice":149,
-         "upc":"190198051875",
-         "categoryPath":"Cell Phones/Straight Talk Wireless/Straight Talk Cell Phones",
-         "longDescription":"Straight Talk Apple iPhone 5S 16GB 4G LTE Prepaid Smartphone:4&quot; Retina displayA7 chip with M7 motion coprocessorTouch ID fingerprint sensorNew 8MP iSight camera with True Tone flash1080p HD video recordingFaceTime HD cameraUltrafast 4G LTE wirelessOver 900,000 apps on the App StoreiOS 7 ; the world's most advanced mobile OSiCloud ; your content on all your devicesResolution: 1136 x 640Storage: 16GBBluetooth 4.0 wireless technologyWireless data: 802.11a/b/g/n WiFi (802.11n 2.4GHz and 5GHz)Assisted GPS with GLONASSBuilt-in rechargeable lithium-ion batteryTalk time: Up to 10 hours on 3GStandby time: Up to 250 hoursInternet use: Up to 8 hours on 3G, up to 10 hours on LTE, up to 10 hours on WiFiVideo playback: Up to 10 hoursAudio playback: Up to 40 hoursWeight and dimensions:Height: 4.87&quot;Width: 2.31&quot;Depth: 0.30&quot;Weight: 3.95 ozWhat's in the Box:Apple iPhone 5SApple EarPods with remote and micLightning to USB CableUSB Power AdapterDocumentation",
-         "brandName":"Apple",
-         "thumbnailImage":"https://i5.walmartimages.com/asr/20caa881-9f84-478b-8259-b9c3448e1007_1.0872b05362d97ff68033417572228b40.jpeg?odnHeight=100&odnWidth=100&odnBg=FFFFFF",
-         "mediumImage":"https://i5.walmartimages.com/asr/20caa881-9f84-478b-8259-b9c3448e1007_1.0872b05362d97ff68033417572228b40.jpeg?odnHeight=180&odnWidth=180&odnBg=FFFFFF",
-         "largeImage":"https://i5.walmartimages.com/asr/20caa881-9f84-478b-8259-b9c3448e1007_1.0872b05362d97ff68033417572228b40.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF",
-         "productTrackingUrl":"http://linksynergy.walmart.com/fs-bin/click?id=|LSNID|&offerid=223073.7200&type=14&catid=8&subid=0&hid=7200&tmpid=1082&RD_PARM1=http%253A%252F%252Fwww.walmart.com%252Fip%252FStraight-Talk-Apple-iPhone-5S-16GB-4G-LTE-Prepaid-Smartphone%252F50285046%253Faffp1%253DOsmgDBzME0u1DW9mDF71IG7sllmBeqZpgYsrALOGfjc%2526affilsrc%253Dapi",
-         "ninetySevenCentShipping":false,
-         "standardShipRate":0,
-         "color":"Gray",
-         "marketplace":false,
-         "shipToStore":true,
-         "freeShipToStore":true,
-         "modelNumber":"iPhone 5S",
-         "productUrl":"http://c.affil.walmart.com/t/api01?l=http%3A%2F%2Fwww.walmart.com%2Fip%2FStraight-Talk-Apple-iPhone-5S-16GB-4G-LTE-Prepaid-Smartphone%2F50285046%3Faffp1%3DOsmgDBzME0u1DW9mDF71IG7sllmBeqZpgYsrALOGfjc%26affilsrc%3Dapi%26veh%3Daff%26wmlspartner%3Dreadonlyapi",
-         "customerRating":"4.289",
-         "customerRatingImage":"http://i2.walmartimages.com/i/CustRating/4_3.gif",
-         "categoryNode":"1105910_1045119_1068804",
-         "rollBack":true,
-         "bundle":false,
-         "clearance":false,
-         "stock":"Available",
-         "attributes":{"actualColor":"Space Gray"},
-         "addToCartUrl":"http://c.affil.walmart.com/t/api01?l=http%3A%2F%2Faffil.walmart.com%2Fcart%2FaddToCart%3Fitems%3D50285046%7C1%26affp1%3DOsmgDBzME0u1DW9mDF71IG7sllmBeqZpgYsrALOGfjc%26affilsrc%3Dapi%26veh%3Daff%26wmlspartner%3Dreadonlyapi",
-         "affiliateAddToCartUrl":"http://linksynergy.walmart.com/fs-bin/click?id=|LSNID|&offerid=223073.7200&type=14&catid=8&subid=0&hid=7200&tmpid=1082&RD_PARM1=http%253A%252F%252Faffil.walmart.com%252Fcart%252FaddToCart%253Fitems%253D50285046%257C1%2526affp1%253DOsmgDBzME0u1DW9mDF71IG7sllmBeqZpgYsrALOGfjc%2526affilsrc%253Dapi",
-         "freeShippingOver50Dollars":true,
-         "giftOptions":{  "allowGiftWrap":false,
-         "allowGiftMessage":true,
-         "allowGiftReceipt":false},
-         "imageEntities":[  {  "thumbnailImage":"https://i5.walmartimages.com/asr/c7447d99-c90c-4039-b098-7ec0949e85ea_1.d6bf6d15f16849b61e85deeac75035c7.jpeg?odnHeight=100&odnWidth=100&odnBg=FFFFFF",
-         "mediumImage":"https://i5.walmartimages.com/asr/c7447d99-c90c-4039-b098-7ec0949e85ea_1.d6bf6d15f16849b61e85deeac75035c7.jpeg?odnHeight=180&odnWidth=180&odnBg=FFFFFF",
-         "largeImage":"https://i5.walmartimages.com/asr/c7447d99-c90c-4039-b098-7ec0949e85ea_1.d6bf6d15f16849b61e85deeac75035c7.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF",
-         "entityType":"SECONDARY"},
-            {  
-         "thumbnailImage":"https://i5.walmartimages.com/asr/20caa881-9f84-478b-8259-b9c3448e1007_1.0872b05362d97ff68033417572228b40.jpeg?odnHeight=100&odnWidth=100&odnBg=FFFFFF",
-         "mediumImage":"https://i5.walmartimages.com/asr/20caa881-9f84-478b-8259-b9c3448e1007_1.0872b05362d97ff68033417572228b40.jpeg?odnHeight=180&odnWidth=180&odnBg=FFFFFF",
-         "largeImage":"https://i5.walmartimages.com/asr/20caa881-9f84-478b-8259-b9c3448e1007_1.0872b05362d97ff68033417572228b40.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF",
-         "entityType":"PRIMARY"}],
-         "offerType":"ONLINE_AND_STORE",
-         "shippingPassEligible":true,
-         "availableOnline":true
-      }
-   ]
-}
-		 * */
-
+		String mod = x.substring(18);// removes the beginning of the string so it can be parsed
+		mod= mod.replace("{","");//
+		mod= mod.replace("}","");// Remove all Brackets from the string
+		mod= mod.replace("[","");//
+		mod= mod.replace("]","");//
+		mod= mod.trim();//removes whight space from the ends so that a comma can be applyed to the end of the final value
+		mod+=",";//adds a comma to the end of the final value
 		
-		
-		
-	/*TODO*/	return null;
-		
+		for(int i=0;i<50;i++){
+			//--------------------------------------------------------------------------------------preps the beginning of the string
+			int locSdelim = mod.indexOf(STARTDELIM);//Contains the index of the start delimiter 
+			if(locSdelim<=0){locSdelim=0;}//                                                        
+			mod = mod.substring(locSdelim);//trims fat off the beginning of the mod sting
+			//--------------------------------------------------------------------------------------grabs the name of the data point
+			int locMdelim = mod.indexOf(MIDDELIM);//Contains the index of the middle delimiter
+			if(locMdelim<=0){locMdelim=0;}//                                                        
+			tempName=mod.substring(0,locMdelim);//grabs the name portion of the string
+			mod = mod.substring(locMdelim);
+			//--------------------------------------------------------------------------------------grabs the data
+			int locEdelim = mod.indexOf(ENDDELIM);//Contains the index of the ending delimiter
+			int openParenthesis = mod.indexOf(parenthesis);//checks to see the location of the next opening parentheses
+			
+			if(openParenthesis<locEdelim){//used to make sure that the program ignores characters in the middle of parenthesis
+				if(openParenthesis<=0){openParenthesis=0;}//stops string out of bound errors
+				String temp = mod.substring(openParenthesis+1);//creates a temporary version of the string starting after the relevant open parenthesis
+				int closeParenthesis = temp.indexOf(parenthesis);//finds the relevant close parenthesis
+				if(closeParenthesis<=0){closeParenthesis=0;}//stops string out of bound errors                                    
+				temp = temp.substring(closeParenthesis);//removes the full value in-between the parenthesis inclusive of the parenthesis 
+				int tempdelim = temp.indexOf(ENDDELIM);//finds the end delimiter after the parenthesis
+				locEdelim = tempdelim + openParenthesis + closeParenthesis+1;//Determines where the end delimiter is located in the master string
+			}
+			
+			if(locEdelim<=0){locEdelim=0;}//stops string out of bound errors
+			tempData=mod.substring(0,locEdelim);//grabs the data portion of the string
+			mod = mod.substring(locEdelim);//trims the name and data just acquired off of the string
+			//--------------------------------------------------------------------------------------
+			raw[i][0]=tempName;//enters the name found into the raw array
+			raw[i][1]=tempData;//enters the data found into the raw array
+			System.out.println(raw[i][0]+"  XX~~~~~~~XX  "+raw[i][1]);//debug
+		}	
+		/*TODO*/	return null;
 	}
+
+	
 	private String SIF(String name, double price, int quantity, String image, boolean sale, String description, String notes,int itemid){
 		String result = "";
 		String temp = "";
@@ -154,12 +134,6 @@ public class GetItem {
 
 	return result;
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 
 }

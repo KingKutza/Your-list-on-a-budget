@@ -1,4 +1,4 @@
-"SIF::name::date_updated::price::quantity::imageurl::sale::itemid::description::notes:"
+"SIF::name::date_updated::price::instock::imageurl::sale::itemid::description::notes:"
 
 Breakdown
 SIF => indicates that the string is in the string item format
@@ -9,8 +9,8 @@ date_updated => fromat 01012017 there are no delimiters between parts all days a
 				contains the date that the item was last received from the walmart server 
 price => format 10.32 the dollar number . the cent number
 		contains the price of the item
-quantity => format 5
-			the number of the item in stock
+instock => format true
+			indicates wether walmart has them in stock
 imageurl => format http://www.walmart.com/imagefile/listapp1  a url 
 			the url provided by walmart linking to a picture of the item
 sale =>	format true
