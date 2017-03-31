@@ -25,23 +25,21 @@ public class GetItem {
 		return result;
 	}
 	
-	public String readResult(String x){
-		
+	public String readResult(String x){	
+		String[][] raw = new String[RAWQUANTITY][2];//the data received from walmart before it is sorted  0 for name 1 for data
+		String[][] parsed = new String[9][2];//the data after it is sorted
+			parsed[0][0]="name";			parsed[0][1]="null";//contains the name of the item
+			parsed[1][0]="date";			parsed[1][1]="null";//contains the date last modified
+			parsed[2][0]="salePrice";		parsed[2][1]="null";//contains the price of the item
+			parsed[3][0]="stock";			parsed[3][1]="null";//contains whether or not the item is in stock
+			parsed[4][0]="thumbnailImage";	parsed[4][1]="null";//contains a link to an image of the item
+			parsed[5][0]="clearance";		parsed[5][1]="null";//contains whether or not the item is on sale
+			parsed[6][0]="itemId";			parsed[6][1]="null";//contains the Walmart Item ID
+			parsed[7][0]="longDescription";	parsed[7][1]="null";//contains a description of the item
+			parsed[8][0]="Notes";			parsed[8][1]="null";//contains any programming notes or debugging information
+		String tempName = "";//holds the extracted name string before parsing
+		String tempData = "";//holds the extracted data string before parsing		
 		if(entryDataValidator(x)){ 
-			String[][] raw = new String[RAWQUANTITY][2];//the data received from walmart before it is sorted  0 for name 1 for data
-			String[][] parsed = new String[9][2];//the data after it is sorted
-				parsed[0][0]="name";			parsed[0][1]="null";//contains the name of the item
-				parsed[1][0]="date";			parsed[1][1]="null";//contains the date last modified
-				parsed[2][0]="salePrice";		parsed[2][1]="null";//contains the price of the item
-				parsed[3][0]="stock";			parsed[3][1]="null";//contains whether or not the item is in stock
-				parsed[4][0]="thumbnailImage";	parsed[4][1]="null";//contains a link to an image of the item
-				parsed[5][0]="clearance";		parsed[5][1]="null";//contains whether or not the item is on sale
-				parsed[6][0]="itemId";			parsed[6][1]="null";//contains the Walmart Item ID
-				parsed[7][0]="longDescription";	parsed[7][1]="null";//contains a description of the item
-				parsed[8][0]="Notes";			parsed[8][1]="null";//contains any programming notes or debugging information
-			String tempName = "";//holds the extracted name string before parsing
-			String tempData = "";//holds the extracted data string before parsing		
-			
 			String mod = x.substring(18);// removes the beginning of the string so it can be parsed
 			mod= mod.replace("{","");//
 			mod= mod.replace("}","");// Remove all Brackets from the string
