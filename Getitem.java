@@ -25,21 +25,25 @@ public class GetItem {
 		return result;
 	}
 	
-	public String readResult(String x){	
-		String[][] raw = new String[RAWQUANTITY][2];//the data received from walmart before it is sorted  0 for name 1 for data
-		String[][] parsed = new String[9][2];//the data after it is sorted
-			parsed[0][0]="name";			parsed[0][1]="null";//contains the name of the item
-			parsed[1][0]="date";			parsed[1][1]="null";//contains the date last modified
-			parsed[2][0]="salePrice";		parsed[2][1]="null";//contains the price of the item
-			parsed[3][0]="stock";			parsed[3][1]="null";//contains whether or not the item is in stock
-			parsed[4][0]="thumbnailImage";	parsed[4][1]="null";//contains a link to an image of the item
-			parsed[5][0]="clearance";		parsed[5][1]="null";//contains whether or not the item is on sale
-			parsed[6][0]="itemId";			parsed[6][1]="null";//contains the Walmart Item ID
-			parsed[7][0]="longDescription";	parsed[7][1]="null";//contains a description of the item
-			parsed[8][0]="Notes";			parsed[8][1]="null";//contains any programming notes or debugging information
-		String tempName = "";//holds the extracted name string before parsing
-		String tempData = "";//holds the extracted data string before parsing		
-		if(entryDataValidator(x)){ 
+	public String readResult(String x){
+		
+		
+			String[][] raw = new String[RAWQUANTITY][2];//the data received from walmart before it is sorted  0 for name 1 for data
+			String[][] parsed = new String[9][2];//the data after it is sorted
+				parsed[0][0]="name";			parsed[0][1]="null";//contains the name of the item
+				parsed[1][0]="date";			parsed[1][1]="null";//contains the date last modified
+				parsed[2][0]="salePrice";		parsed[2][1]="null";//contains the price of the item
+				parsed[3][0]="stock";			parsed[3][1]="null";//contains whether or not the item is in stock
+				parsed[4][0]="thumbnailImage";	parsed[4][1]="null";//contains a link to an image of the item
+				parsed[5][0]="clearance";		parsed[5][1]="null";//contains whether or not the item is on sale
+				parsed[6][0]="itemId";			parsed[6][1]="null";//contains the Walmart Item ID
+				parsed[7][0]="longDescription";	parsed[7][1]="null";//contains a description of the item
+				parsed[8][0]="Notes";			parsed[8][1]="null";//contains any programming notes or debugging information
+			String tempName = "";//holds the extracted name string before parsing
+			String tempData = "";//holds the extracted data string before parsing	
+			
+			if(entryDataValidator(x)){ 
+				
 			String mod = x.substring(18);// removes the beginning of the string so it can be parsed
 			mod= mod.replace("{","");//
 			mod= mod.replace("}","");// Remove all Brackets from the string
@@ -76,99 +80,152 @@ public class GetItem {
 				tempData=mod.substring(0,locEdelim);//grabs the data portion of the string
 				mod = mod.substring(locEdelim);//trims the name and data just acquired off of the string
 				//--------------------------------------------------------------------------------------
+				//if(tempName.length() >3){
+				//tempName = tempName.substring(1, tempName.length()-1);
+				//}
 				raw[i][0]=tempName;//enters the name found into the raw array
 				raw[i][1]=tempData;//enters the data found into the raw array
+				
+			}
+			
+			for(int i=0; i<RAWQUANTITY; i++){ //TODO
+				raw[i][0] = raw[i][0].replaceAll(Character.toString(PARENTHESIS), "");
+				raw[i][1] = raw[i][1].replaceAll(Character.toString(PARENTHESIS),"");
+				
+				raw[i][1] = raw[i][1].replaceFirst(":", "");
+				
+				
 				System.out.println(raw[i][0]+"  XX~~~~~~~XX  "+raw[i][1]);//debug
 			}
 			
 			boolean stillTrue = true;
 				
 			for(int i=0; i<RAWQUANTITY; i++){ //validates and inserts the data for name
+				
+				
 				if(raw[i][0].equals(parsed[0][0])){ // if raw is at location 0 (value), i is stepping through raw equals the name we are looking for
-					if(raw[1][i].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
+					
+					if(raw[i][1].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
+						
 						parsed[0][1]=(raw[i][1]);  //then break to go to next part of code
-						break;	
+						
+						//break;	
 					}else {
 						stillTrue = false;
 					}	
 				}							
 				if(raw[i][0].equals(parsed[2][0])){ // PRICE // if raw is at location 0 (value), i is stepping through raw equals the name we are looking for
-					if(raw[1][i].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
-						if(isInteger(raw[i][1])){
+					
+					if(raw[i][1].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
+						//if(isInteger(raw[i][1])){
 							parsed[2][1]=(raw[i][1]);
-							break;
-						}else {
-							stillTrue = false;
-						}
+							//break;
+						//}else {
+							//stillTrue = false;
+						//}
 					}	
 				}
 				if(raw[i][0].equals(parsed[3][0])){ //STOCK // if raw is at location 0 (value), i is stepping through raw equals the name we are looking for
-					if(raw[1][i].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file	
-						if(raw[i][0].equals(true) || raw[i][0].equals(false)){ //boolean
-							parsed[3][1]=(raw[i][1]);  //then break to go to next part of code
-							break;
+					
+					if(raw[i][1].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file	
+						raw[i][1] = raw[i][1].replaceAll(Character.toString(PARENTHESIS), "");
+						
+						if(raw[i][1].equals("Available") ){ //boolean
+						
+							parsed[3][1]= "true";  //then break to go to next part of code
+							
+							//break;
+						}
+							else if 
+								(raw[i][1].equals("Unavailable")){
+								parsed[3][1] = "false";
+							
 						}else {
+							
 							stillTrue = false;
 						}
 					}	
 				}
 				if(raw[i][0].equals(parsed[4][0])){ //THUMBNAIL // if raw is at location 0 (value), i is stepping through raw equals the name we are looking for
-					if(raw[1][i].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
-						if(raw[i][0].substring(0,7).equals("http://")){
+					System.out.println("1");
+					if(raw[i][1].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
+						System.out.println(raw[i][1].substring(0, 8));
+						if(raw[i][1].substring(0,8).equals("https://")){
+							raw[i][1] = raw[i][1].replaceAll(Character.toString(PARENTHESIS), "");
+							System.out.println("3");
 							parsed[4][1]=(raw[i][1]);  //then break to go to next part of code
-							break;
+							System.out.println("4");
+							//break;
 						}else{
+							System.out.println("5");
 							stillTrue = false;
 						}
 					}
 				}
 				if(raw[i][0].equals(parsed[5][0])){ // CLEARANCE  if raw is at location 0 (value), i is stepping through raw equals the name we are looking for
-					if(raw[1][i].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
-						if(raw[i][0].equals(true) || raw[i][0].equals(false)){ //boolean
+					if(raw[i][1].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
+						if(raw[i][1].equals("true") || raw[i][1].equals("false")){ //boolean
 							parsed[5][1]=(raw[i][1]);  //then break to go to next part of code
-							break;
+							//break;
 						}else{
 							stillTrue = false;
 						}
 					}
 				}
 				if(raw[i][0].equals(parsed[6][0])){ // ITEM ID  if raw is at location 0 (value), i is stepping through raw equals the name we are looking for
-					if(raw[1][i].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
+					if(raw[i][1].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
 						parsed[6][1]=(raw[i][1]);  //then break to go to next part of code
-						break;	
+						
+						
+						//break;	
+						
+						
 					}else {
 						stillTrue = false;
 					}	
 				}
 				if(raw[i][0].equals(parsed[7][0])){ // LONG DESCRIPTION if raw is at location 0 (value), i is stepping through raw equals the name we are looking for
-					if(raw[1][i].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
+					if(raw[i][1].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
 						parsed[7][1]=(raw[i][1]);  //then break to go to next part of code
-						break;
+						//break;
 					}else{
 						stillTrue = false;
 					}
 				}
 				if(raw[i][0].equals(parsed[8][0])){ //NOTES  if raw is at location 0 (value), i is stepping through raw equals the name we are looking for	
-					if(raw[1][i].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
+					if(raw[i][1].length() != -1){  //find and execute once when found it //if data inside of data section of portion(has a name) move name into name slot on parsed and processed file
 						parsed[8][1]=(raw[i][1]);  //then break to go to next part of code
-						break;
+						//break;
 					}else {
 						stillTrue = false;
 					}
 				}	
 			} //if (stillTrue){ System.out.println("Validator working");//debug
-		}	
 			String Result = "";
-			Result = SIF(parsed[0][1], parsed[1][1], parsed[3][1], parsed[4][1], parsed[5][1], parsed[6][1], parsed[7][1], parsed[8][1]);	
-			System.out.println(Result);
-	/*TODO*/return null;  //determine that it's the data and send it out
+			
+			
+			Result = SIF(parsed[0][1], parsed[2][1], parsed[3][1], parsed[4][1], parsed[5][1], parsed[6][1], parsed[7][1], parsed[8][1]);	
+			
+			
+			if (stillTrue){
+				return Result;
+			} else {
+				return null;
+			}
+			
+		}
+			return tempData;	
+			
+	
 	}		
 	
 	private boolean isInteger(String string) {
 	    try {
 	        Integer.valueOf(string);
+	        System.out.println("true");
 	        return true;
 	    } catch (NumberFormatException e) {
+	    	System.out.println("false");
 	        return false;
 	    }
 	}
@@ -217,7 +274,7 @@ public class GetItem {
 		
 	}
 	
-	private String SIF(String name, String price, String quantity, String image, String sale, String description, String notes, String itemid){
+	private String SIF(String name, String price, String quantity, String image, String sale, String itemid, String description, String notes){
 		String result = "";
 		String temp = "";
 		//^^^^^^^^^^^^^^^ variables
@@ -230,9 +287,11 @@ public class GetItem {
 		result +=":";
 		//^^^^^^^^^^^^^^^ name
 		//^^^^^^^^^^^^^^^ name
+		result+=":";
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");	
 		Date dateobj = new Date();
 		result+= df.format(dateobj);
+		result+=":";
 		//^^^^^^^^^^^^^^^ date
 		//vvvvvvvvvvvvvvv price	
 		result+= ":";
