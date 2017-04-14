@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.taylor.additem.Add_Item">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search:"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="44dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="163dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="31dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="152dp"
+        android:layout_height="135dp"
+        app:srcCompat="?attr/colorPrimary"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price:"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="376dp" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="364dp" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="114dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteY="183dp"
+        tools:layout_editor_absoluteX="177dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity:"
+        tools:layout_editor_absoluteX="206dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="67dp"
+        android:layout_height="38dp"
+        android:text="ADD"
+        tools:layout_editor_absoluteX="301dp"
+        tools:layout_editor_absoluteY="183dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="54dp"
+        android:layout_height="46dp"
+        android:text="OK"
+        tools:layout_editor_absoluteX="314dp"
+        tools:layout_editor_absoluteY="31dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="447dp" />
+
+</android.support.constraint.ConstraintLayout>
