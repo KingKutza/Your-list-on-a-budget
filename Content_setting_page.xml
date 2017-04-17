@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="orgin.v02.Setting_page"
+    tools:showIn="@layout/activity_setting_page">
+
+
+
+    <Button
+        android:id="@+id/SaveBtn"
+        android:text="Save and Return"
+        android:onClick="SaveBtnClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="105dp"
+        android:layout_marginBottom="50dp"
+    />
+
+    <EditText
+        android:id="@+id/ApiLocationEtbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="ApiLocationClick"
+        android:layout_marginBottom="45dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Api Location"
+        android:textAlignment="center"
+        android:layout_above="@+id/SaveBtn"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/ApikeyEtbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="ApiKeyClick"
+        android:layout_above="@+id/ApiLocationEtbox"
+        android:layout_alignLeft="@+id/ApiLocationEtbox"
+        android:layout_alignStart="@+id/ApiLocationEtbox"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Api Key"
+        android:textAlignment="center" />
+
+    <CheckBox
+        android:id="@+id/BudgetstrictCkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ApikeyEtbox"
+        android:layout_centerHorizontal="true"
+        android:text="hold you to your budget" />
+
+    <CheckBox
+        android:id="@+id/BudgetRemindCkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/BudgetstrictCkbox"
+        android:layout_centerHorizontal="true"
+        android:text="Budget Reminders" />
+
+    <EditText
+        android:id="@+id/BudgetdefaultEtbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/BudgetRemindCkbox"
+        android:layout_alignLeft="@+id/ApikeyEtbox"
+        android:layout_alignStart="@+id/ApikeyEtbox"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Default Budget"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/ZipcodeEtbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Zip Code"
+        android:textAlignment="center"
+        android:layout_above="@+id/BudgetLable"
+        android:layout_alignLeft="@+id/BudgetdefaultEtbox"
+        android:layout_alignStart="@+id/BudgetdefaultEtbox" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Settings"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/ZipLable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ZipcodeEtbox"
+        android:layout_centerHorizontal="true"
+        android:text="Zip Code" />
+
+    <TextView
+        android:id="@+id/BudgetLable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default Budget"
+        android:layout_above="@+id/BudgetdefaultEtbox"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
